@@ -1,0 +1,107 @@
+\documentclass{article}
+\usepackage[a4paper, margin=2.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage{placeins}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{setspace}
+\usepackage{float}
+
+%\usepackage[active,tightpage]{preview}
+\usepackage{natbib}
+\bibpunct{(}{)}{,}{a}{}{;} 
+\usepackage{url}
+\usepackage{nth}
+\usepackage{authblk}
+% for the d in integrals
+\newcommand{\dd}{\; \mathrm{d}}
+\newcommand{\tc}{\quad\quad\text{,}}
+\newcommand{\tp}{\quad\quad\text{.}}
+\newcommand{\ra}{\rightarrow}
+\def\lsub#1#2%
+  {\mathop{}%
+   \mathopen{\vphantom{#2}}_{#1}%
+   \kern-\scriptspace%
+   #2}
+\def\lsup#1#2%
+  {\mathop{}%
+   \mathopen{\vphantom{#2}}^{#1}%
+   \kern-\scriptspace%
+   #2}
+
+
+\defcitealias{HMD}{HMD}
+
+\newcommand\ackn[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+\begin{document}
+
+%\title{Macro patterns in the shape of aging}
+\title{Analytic state episode decomposition \\ (proof of concept)}
+\author[1]{Tim Riffe\thanks{riffe@demogr.mpg.de}}
+\affil[1]{Max Planck Institute for Demographic Research}
+\maketitle
+[This note will be circulated among a few people, and the idea advertised at a lab talk in September, but I do not expect to have time to develop the idea further until REVES abstracts are due for the 2019 meeting in Barcelona.]
+\begin{abstract}
+On the basis of a discrete time Markov matrix population model, we describe
+how to decompose expected state occupancies into the expected contributions of state
+episodes by duration. Results can be summarized in terms of short (acute) and
+long (chronic) episodes, into first, intermediate, and terminal contributions.
+Additional decomposition steps are able to isolate the effects of 
+\end{abstract}
+
+Transition rates or probabilities are usually used to calculate state
+expectancies, such as healthy or unhealthy life expectancy, working life
+expectancy, and so forth. The discrete life trajectories that are
+implied by state transition probabilities are not usually invoked, but they are
+straightforward to calculate or imagine. The reason why researchers do not
+calculate the full trajectory space implied by transition probabilities is
+that this object is often too large for present computational facilities to
+efficiently handle. For example, a population model with $s$ states (not
+including dead) and $a$ age classes (closed out after the final age class)
+implies a total of $s^1 + s^2 + \ldots + s^a$ possible discrete
+life trajectories. These trajectories are at our fingertips, but somehow out of
+reach. So much useful and interesting information lies in this trajectory space,
+however: how does the character of state episodes change over age? Are
+terminal spells (those ending in death) shorter or longer than other spells? Is
+a change in expectancy due to having more acute or more chronic disability
+spells? Such questions can be answered with transition probabilities, and not
+necessarily Markovian ones. Examples here will however be Markovian.
+
+In a previous treatment I toyed with such trajectories,
+skirting the large numbers problem by sampling from the trajectory space
+\citep{riffespells2018}. With trajcetory sets of manageable size, one is free to
+play with different notions of lifecourse alignment, and time counting, which enables
+the generation of a diverse set of macro patterns from
+the same set of transition probabilities. Analytical approaches to the episode statistics of matrix population models have been worked out to calculate the mean number and duration of episodes \citep{dudel2018b}. Here I'd like to offer a proof of concept for an analytical approach to work out the full episode duration distribution for states. Some prior knowledge is assumed.
+
+This method is cheap and available with some data objects that we already are in the habit of calculating: the fundamental matrix $\mathbf{N}$ and transition probabilities, $\mathbf{p}_x^{i\ra j}$, where $x$ is the lower bound of the discrete age class, $i$ is the origin state, and $j$ is the destination state, where death is also a potential destination, and where the case of $i=j$ denotes remaining in the state. Recall that the elements of $\mathbf{N}$ are the conditional age-state occupancies (conditional on starting at the youngest age and in a given state). Say we have $s=3$ (say, healthy, mildly, and severly disabled), where 4 is dead, and age classes are single years. Say we want to know the episode duration distribution for episodes of state 2 that start at age 50. Then we'd need to extract from $\mathbf{N}$ the probability of not being in state 2 at age 49 $\pi_{49}^{-2}$ 
+\begin{equation}
+\pi_{49}^{-2} = \pi_{49}^1 + \pi_{49}^3 \tp
+\end{equation}
+The probability of an episode of state 2 starting at age 50 $\epsilon^{2,new}
+_{50}$ is:
+\begin{equation}
+\epsilon^{2,new}
+_{50}=\frac{\pi_{49}^1 \cdot p_{49}^{1\ra 2} + \pi_{49}^3 \cdot p_{49}^{3\ra 2}}{\pi_{49}^{-2}}
+\end{equation}
+Episodes starting at age 50 can assume a range of durations, and the distribution of durations can be derived by taking cumulative products of the probability of simply staying in state 2. Let's use demographers' interval notation to denote $\lsub{d}{e^{2}_{50}}$ as the episodes of state 2 starting at age 50 and of duration $d$. Then
+\begin{equation}
+\lsub{d}{\epsilon^{2}_{50}} = \epsilon^{2,new}
+_{50} \cdot \prod _{n=0}^d p_{50+n}^{2\ra 2}
+\end{equation}
+
+And indeed $\lsub{d}{\epsilon^{2}_{50}}$ is a probability, and $e(a)^{s} = \sum \sum \lsub{d}{\epsilon^{s}_{a}}$. 
+An empirial example may need to wait until I need to prepare the September lab talk. It may involve downstream decompositions, \'a la \citet{riffe2018arrow} and \citet{riffe2018hledecomp}.
+
+
+\FloatBarrier
+\singlespacing
+\bibliographystyle{plainnat}
+  \bibliography{references} 
+\end{document}
