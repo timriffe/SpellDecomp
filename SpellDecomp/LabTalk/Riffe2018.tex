@@ -77,7 +77,7 @@
  Some motivating observations:\vspace{2em}
  \begin{enumerate}[<+->]
  \item Health \emph{inequality} is multidimensional: episode duration important? 
- \item Dudel's expression for average episode count \& duration
+ \item Dudel's expression for average episode count \& duration: how about distributions?
  \end{enumerate}
 \end{frame}
 
@@ -114,8 +114,6 @@ A common sight:\vspace{-1em}
  \item $\pi^{-s}$ prevalence of not being in $s$
  \item $p^{\rightarrow s}$ probaility of transition to $s$
  \end{itemize}
- 
- Let $\textbf{E}^s$ be a matrix with $\epsilon^{s,new}$ in the diagonal
 \end{frame}
 
 % ---------------------
@@ -127,7 +125,7 @@ A common sight:\vspace{-1em}
 \item Let $\textbf{N}^s = \left( \textbf{I} - \textbf{U}^s \right)^{-1}$ 
 \item Then the conditional elapsed time spent in $s$: $\mathbcal{E}^s = \textbf{N}^s \textbf{E}^s$
 \item $\EX(s,x) = \textbf{e}' \mathbcal{E}^s \textbf{e} + \textcolor{mygray2}{p^s(x) \sum_{t=x}^\omega \prod_{i=t}^\omega p^{s\rightarrow s}(i)}$ 
-\item The matrix $\mathbcal{E}^s$ is a decomposition of  $\EX(s)$ by age and duration
+\item The matrix $\mathbcal{E}^s$ is a decomposition of  $\EX(s)$ by age and elapsed time in $s$
 \end{itemize}
 
 \end{frame}
@@ -187,6 +185,65 @@ Disability decomposed 2006 females (all edu):\vspace{-1em}
 \begin{center}
 \includegraphics[scale=1]{Figures/DisElapsed.pdf}
 \end{center}
+\end{frame}
+
+\begin{frame}[plain]
+\Large
+Disability decomposed 2006 females (all edu):\vspace{-1em}
+\begin{center}
+\includegraphics[scale=1]{Figures/DisTotalDur.pdf}
+\end{center}
+\end{frame}
+
+\begin{frame}[plain]
+\Large
+\centering
+Are the contents of such decompositions relevant to health inequality?
+\end{frame}
+
+\begin{frame}[plain]
+\Large
+\centering
+Extra 1: terminal vs other states.
+
+\pause
+Deaths by age and elapsed time of terminated episode
+
+$\textbf{D}^s = diag(\textbf{p}^{s\rightarrow \dagger}) \mathbcal{E}^s $
+
+\end{frame}
+
+\begin{frame}[plain]
+\Large
+\vspace{1em}
+\begin{center}
+Proportion of DLE composed of terminal episodes, by sex and education:\vspace{-1em}
+\includegraphics[scale=.9]{Figures/PropTerminalEdu.pdf}
+\end{center}
+\end{frame}
+
+\begin{frame}[plain]
+\Large
+\begin{center}
+Extra 2: everything is a function of transition probabilities
+
+\vspace{1em}
+\pause
+Use general decomposition method, such as Horiuchi et. al. (2008) in \texttt{R} package \texttt{DemoDecomp}
+\end{center}
+\end{frame}
+
+
+\usebackgroundtemplate{%
+  \includegraphics[width=\paperwidth,height=\paperheight]{willian-justen-de-vasconcellos-595793-unsplash.jpg}} 
+\begin{frame}[plain]
+\Large
+\centering
+Episode decomposition and healthy inequality\\ What are your thoughts?\\ \vspace{1em}Thanks!
+\tiny
+\flushright
+\vspace{13cm}
+   Photo by Willian Justen de Vasconcellos
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%	End of the document			%%
